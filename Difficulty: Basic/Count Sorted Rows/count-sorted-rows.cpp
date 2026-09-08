@@ -1,21 +1,23 @@
 class Solution {
 	public:
-	int sortedCount(int N, int M, vector<vector<int>> Mat) {
+	int sortedCount(vector<vector<int>> &mat) {
 		// code here
 		int cnt = 0;
-		for (int i = 0 ; i < N ; i++) {
-			bool inc = true;
-			bool dec = true;
-			for (int j = 0 ; j < M -1 ; j++) {
-				if (Mat[i][j] >= Mat[i][j + 1]){
-                    inc = false;
+		int n = mat.size();
+		int m = mat[0].size();
+		for (int i = 0 ; i < n ; i++) {
+			int incOrder = 1;
+			int decOrder = 1;
+			for (int j = 0 ; j < m - 1 ; j++) {
+				if (mat[i][j] >= mat[i][j + 1]) {
+					incOrder = 0;
 				}
-                if (Mat[i][j] <= Mat[i][j + 1]) {
-                    dec = false;
-                }    
+				if (mat[i][j] <= mat[i][j + 1]) {
+					decOrder = 0;
+				}
 			}
-			if (inc == true || dec == true){
-                cnt++;
+			if (incOrder == 1 || decOrder == 1) {
+				cnt++;
 			}
 		}
 		return cnt;
